@@ -1,0 +1,53 @@
+export class Day {
+  date: Date;
+
+  constructor (date:Date) {
+    this.date = date;
+  }
+
+  totalWorked ():number {return 0;}
+  getDayDate ():Date {return this.date;}
+}
+
+export class WorkedDay extends Day {
+  morning: boolean;
+  afternoon: boolean;
+
+  constructor (date: Date, morning: boolean, afternoon: boolean) {
+    super(date);
+    this.morning = morning;
+    this.afternoon = afternoon;
+  }
+
+  addMorning (): void {
+    this.morning = true;
+  }
+
+  removeMorning (): void {
+    this.morning = false;
+  }
+
+  addAfternoon (): void {
+    this.afternoon = true;
+  }
+
+  removeAfternoon (): void {
+    this.afternoon = false;
+  }
+
+  addWholeDay (): void {
+    this.addMorning();
+    this.addAfternoon();
+  }
+
+  reset (): void {
+    this.removeMorning();
+    this.removeAfternoon();
+  }
+
+  totalWorked (): number {
+    return (this.morning ? 0.5 : 0) + (this.afternoon ? 0.5 : 0);
+  }
+}
+
+export class Holiday extends Day {}
